@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import axios from 'axios';
+import socket from './socket';
 
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER';
 const WRITE_MESSAGE = 'WRITE_MESSAGE'; // get the input text from the UI and post it in db.
@@ -34,12 +35,12 @@ export const gotMessageFromServer = (newMessage) => ({
 
 export const postMessageToServer = (message) => (
   async (dispatch) => {
-   try{
-     console.log("posting", message);
+   try {
     const {data} = await axios.post('/api/messages', message);
-    console.log("data", data);
     dispatch(gotMessageFromServer(data));
-   } catch(err){
+
+    socket.emit('new-message', data);
+   } catch (err){
      console.error(err.stack);
    }
   }
