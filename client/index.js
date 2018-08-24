@@ -13,9 +13,9 @@ import { Main } from './components';
 
 ReactDOM.render(
   <Provider store={store}>
-  <Router>
-    <Main />
-  </Router>
+    <Router>
+      <Main />
+    </Router>
   </Provider>,
   document.getElementById('app')
 );
