@@ -22,8 +22,9 @@ class UnconnectedNewMessageEntry extends Component {
 
     const channelId = this.props.channelId;
     const content = this.props.newMessageEntry;
+    const name = this.props.authorName;
     const message = {
-      channelId, content
+      channelId, content, name,
     };
 
     this.props.submit(message);
@@ -51,7 +52,8 @@ class UnconnectedNewMessageEntry extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  newMessageEntry: state.newMessageEntry
+  newMessageEntry: state.newMessageEntry,
+  authorName: state.authorName
 });
 
 const mapDispatchToProps = (dispatch) => ({
