@@ -32,10 +32,12 @@ export const gotMessageFromServer = (newMessage) => ({
   newMessage
 })
 
-export const getMessageFromServer = (newMessageEntry) => (
+export const postMessageToServer = (message) => (
   async (dispatch) => {
    try{
-    const {data} = await axios.post('/api/messages', newMessageEntry);
+     console.log("posting", message);
+    const {data} = await axios.post('/api/messages', message);
+    console.log("data", data);
     dispatch(gotMessageFromServer(data));
    } catch(err){
      console.error(err.stack);
