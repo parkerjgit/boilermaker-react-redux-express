@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { thunkMiddleware } from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import axios from 'axios';
 
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER';
@@ -20,8 +20,8 @@ const initialState = {
   messages: [],
 }
 
-const reducer = (prevState=initialState, action) => {
-  switch(action.type) {
+const reducer = (prevState = initialState, action) => {
+  switch (action.type) {
     case GOT_MESSAGES_FROM_SERVER:
       return {...prevState, messages: action.messages};
     default:
