@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 //TODO: FIX ROUTER NAME AND PATH BELOW!!!
-const sampleRouter = require('./api/sampleRouter');
+const projects = require('./api/projects');
 const app = express();
 
 //morgan middleware
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //TODO: INSERT ACTUAL ROUTE AND ROUTER NAME BELOW!!!
-app.use('/INSERT_ROUTE', sampleRouter)
+app.use('/api', projects)
 
 //sends the one html page we have upon someone requesting the site
 app.get('/', (req, res, next) => {

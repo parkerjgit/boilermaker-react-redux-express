@@ -1,5 +1,5 @@
 const PORT = 1337;
-const app = require('./index')
+const app = require('.')
 const {db} = require('./db')
 
 //sync db and start server
