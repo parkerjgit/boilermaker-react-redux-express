@@ -1,46 +1,40 @@
-const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const db = require('./db');
-const PORT = process.env.PORT || 8080;
+const path = require('path');
+//TODO: FIX ROUTER NAME AND PATH BELOW!!!
+const sampleRouter = require('./api/sampleRouter');
 const app = express();
-const server = app.listen(PORT, () => console.log(`Feeling chatty on port ${PORT}`));
-const io = require('socket.io')(server);
 
-// handle sockets
-require('./socket')(io);
-
-module.exports = app;
-
-db.sync().then(() => console.log('Database is synced'));
-
-// logging middleware
+//morgan middleware
 app.use(morgan('dev'));
 
-// static middleware
-app.use(express.static(path.join(__dirname, '..', 'node_modules')));
+//to use public folder
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// body parsing middleware
-app.use(express.json());
+//for any bodies we receive
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// 'API' routes
-app.use('/api', require('./api'));
+//TODO: INSERT ACTUAL ROUTE AND ROUTER NAME BELOW!!!
+app.use('/INSERT_ROUTE', sampleRouter)
 
-// 404 middleware
+//sends the one html page we have upon someone requesting the site
+app.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+})
+
+//for 404 errors
 app.use((req, res, next) =>
   path.extname(req.path).length > 0 ?
     res.status(404).send('Not found') :
     next()
 );
 
-// send index.html
-app.use('*', (req, res, next) =>
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-);
-
-// error handling endware
-app.use((err, req, res, next) =>
+//for server errors
+app.use((err, req, res, next) => {
+  console.error(err, typeof next)
+  console.error(err.stack)
   res.status(err.status || 500).send(err.message || 'Internal server error.')
-);
+})
+
+module.exports = app

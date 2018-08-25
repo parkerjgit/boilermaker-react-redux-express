@@ -1,31 +1,28 @@
 {
-  "name": "stackchat",
+  "name": "boiler",
   "version": "1.0.0",
-  "description": "A chatty appy chat app",
+  "description": "boilerplate for express, postgreSQL, react, redux",
   "main": "index.js",
   "scripts": {
     "start": "npm run start-server & npm run build-watch",
-    "start-server": "nodemon server -w server",
-    "build-watch": "webpack -w",
-    "seed": "node seed.js"
+    "start-server": "nodemon server/main.js",
+    "build-watch": "webpack -w"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.15.3",
-    "bootstrap": "^3.3.7",
-    "express": "^4.14.1",
-    "morgan": "^1.8.1",
-    "pg": "^6.1.2",
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.0.0",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^4.4.0",
-    "socket.io": "^1.7.2"
+    "sequelize": "^4.38.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -36,8 +33,8 @@
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^1.0.0",
     "nodemon": "^1.18.3",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.16.1",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   }
 }
