@@ -1,6 +1,6 @@
 const PORT = 1337;
 const app = require('.')
-const {db} = require('./db')
+const db = require('./db')
 
 //sync db and start server
 const init = async () => {

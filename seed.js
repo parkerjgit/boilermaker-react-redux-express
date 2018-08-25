@@ -2,7 +2,7 @@ const {db} = require('./server/db');
 // const Author = require('./server/db/models/author');
 // const Message = require('./server/db/models/message');
 // const Channel = require('./server/db/models/channel');
-const Projects = require('./server/db/projects')
+const Projects = require('./server/db/models/projects')
 
 
 // const id = () => Math.round(Math.random() * (authors.length - 1)) + 1;

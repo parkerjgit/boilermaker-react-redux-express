@@ -1,9 +1,7 @@
 const db = require('./db')
-const Projects = require('./projects')
 
-//define associations here
+// register models
+require('./models');
 
-module.exports = {
-  db,
-  Projects
-}
+module.exports = db
+
