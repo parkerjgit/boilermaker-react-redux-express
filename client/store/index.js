@@ -4,7 +4,6 @@ import logger from 'redux-logger'
 import axios from 'axios';
 // import socket from './socket'
 
-
 // STATE
 const init_state = {
   projects: [],

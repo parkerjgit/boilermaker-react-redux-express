@@ -1,7 +1,7 @@
-import './index.css';
+import './assets/index.css';
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
+import {App} from './components'
 
 import { Provider } from 'react-redux'
 import store from './store/index'
