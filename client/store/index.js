@@ -7,7 +7,8 @@ import axios from 'axios';
 // STATE
 const init_state = {
   projects: [],
-  loading: true
+  loading: false,
+  error: false
 }
 
 // ACTIONS
@@ -15,7 +16,9 @@ const ACTIONS = {
   PROJECTS: {
     SET: 0,
     ADD: 1,
-    FETCH: 2
+    FETCH: 2,
+    LOADING: 3,
+    ERROR: 4
   }
 }
 
@@ -24,10 +27,24 @@ export const setProjects = (projects) => ({
   type: ACTIONS.PROJECTS.SET,
   projects
 })
+export const setLoading = (loading) => ({
+  type: ACTIONS.PROJECTS.LOADING,
+  loading
+})
+export const setError = (error) => ({
+  type: ACTIONS.PROJECTS.LOADING,
+  error
+})
 
 export const fetchProjects = () => async (dispatch) => {
-  const {data: projects} = await axios.get('/api/projects');
-  dispatch(setProjects(projects))
+  dispatch(setLoading(true));
+  try {
+    const {data: projects} = await axios.get('/api/projects');
+    dispatch(setProjects(projects))
+    dispatch(setLoading(false))
+  } catch (error) {
+    dispatch(setError(true))
+  }
 }
 
 // export const addProject = (project) => async (dispatch) => {
@@ -47,8 +64,17 @@ const reducer = (state = init_state, action) => {
   } else if (action.type === ACTIONS.PROJECTS.ADD) {
     return {
       ...state,
-      projects: [...state.projects, action.project],
-      loading: false
+      projects: [...state.projects, action.project]
+    }
+  } else if (action.type === ACTIONS.PROJECTS.LOADING) {
+    return {
+      ...state,
+      loading: action.loading
+    }
+  } else if (action.type === ACTIONS.PROJECTS.ERROR) {
+    return {
+      ...state,
+      error: action.error
     }
   }
   return state

@@ -1,14 +1,12 @@
 import React from 'react';
-// import Gallery from './Gallery'
-import {Gallery} from '../components'
+import {Projects} from '../components'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
 
 const App = () => {
   return (
     <Router>
       <div id="main">
-        {/* <Gallery /> */}
-        <Route path="/" component={Gallery} />
+        <Route path="/" component={Projects} />
       </div>
     </Router>
   )

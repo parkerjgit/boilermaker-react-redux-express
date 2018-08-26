@@ -1,4 +1,10 @@
-import Gallery from './Gallery'
+import Projects from './Projects'
+import ProjectsGallery from './ProjectsGallery'
+import ProjectsList from './ProjectsList'
 import App from './App'
 
-export {Gallery, App}
+export {
+  Projects,
+  ProjectsGallery,
+  ProjectsList,
+  App}
