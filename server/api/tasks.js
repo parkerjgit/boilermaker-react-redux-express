@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { Project } = require('../db/models')
+const { Task } = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const projects = await Project.findAll()
-    res.json(projects)
+    const tasks = await Task.findAll()
+    res.json(tasks)
   } catch (error) {
     next(error)
   }

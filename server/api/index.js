@@ -3,6 +3,7 @@ module.exports = router;
 
 // API SUB-ROUTES GO HERE...
 router.use('/projects', require('./projects'));
+router.use('/tasks', require('./tasks'));
 
 router.use((req, res, next) => {
   res.status(404).send('Not found');

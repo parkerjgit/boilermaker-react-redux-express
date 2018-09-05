@@ -6,7 +6,15 @@ const ProjectsList = (props) => {
     <div>
         <div>I'm a list</div>
         {projects.map(project => (
-          <div>I'm {project.name}</div>
+          <div>
+            <div>I'm {project.name}</div>
+            {/* <div>Here are my tasks: {JSON.stringify(project.tasks)}</div> */}
+            <ul>
+              {project.tasks.map(task => (
+                <li>{task.name}</li>
+              ))}
+            </ul>
+          </div>
         ))}
     </div>
   )

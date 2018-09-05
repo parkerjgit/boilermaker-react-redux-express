@@ -2,6 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
+const PORT = 1337;
+// const app = require('.')
+const db = require('./db')
+
 const app = express();
 
 //morgan middleware
@@ -36,4 +40,15 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
-module.exports = app
+//sync db and start server
+const init = async () => {
+  // await syncAndSeed();
+  await db.sync();
+  app.listen(`${PORT}`, () => {
+    console.log(`listening on port ${PORT}`);
+  });
+};
+
+init();
+
+// module.exports = app

@@ -1,7 +1,10 @@
-const Projects = require('./projects');
+const Project = require('./project');
+const Task = require('./task');
 
 //relations
+Project.hasMany(Task);
 
 module.exports = {
-  Projects
+  Project,
+  Task
 };
