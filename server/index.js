@@ -26,7 +26,9 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 })
 
-//for 404 errors
+// If someone makes a request that does NOT start with `/api`,
+// this middleware will generate a 404, and send it to your
+// error-handling endware!
 app.use((req, res, next) =>
   path.extname(req.path).length > 0 ?
     res.status(404).send('Not found') :
