@@ -46,6 +46,7 @@ app.use((err, req, res, next) => {
 
 // sessions ---
 const session = require('express-session');
+const passport = require('passport');
 
 // configure and create our database store
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -64,6 +65,25 @@ app.use(session({
 // Then, on our deployment server, we can set an environment variable called SESSION_SECRET with our real secret!
 // Our secrets would still be exposed if an attacker got access to our server (but if that happens, we're pretty much screwed anyway). So as long as we protect access to our deployment server, we should be fine.
 
+// initialize passport so that it will consume our req.session object, and attach the user to the request object.
+app.use(passport.initialize());
+app.use(passport.session());
+
+// serialization is usually only done once per session (after we invoke req.login, so that passport knows how to remember the user in our session store. Generally, we use the user's id.
+passport.serializeUser((user, done) => {
+  try {
+    done(null, user.id);
+  } catch (err) {
+    done(err);
+  }
+});
+
+// Deserialization runs with every subsequent request that contains a serialized user on the session - passport gets the key that we used to serialize the user, and uses this to re-obtain the user from our database.
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(done);
+});
 
 // start it up -------------------
 
