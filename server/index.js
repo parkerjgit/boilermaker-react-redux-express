@@ -2,9 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 
-const PORT = 1337;
+// const PORT = 1337;
 // const app = require('.')
-const db = require('./db')
+
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/api', require('./api'));
 
 //sends the one html page we have upon someone requesting the site
-app.get('/', (req, res, next) => {
+app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 })
 
@@ -42,15 +42,14 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.')
 })
 
-//sync db and start server
-const init = async () => {
-  // await syncAndSeed();
-  await db.sync();
-  app.listen(`${PORT}`, () => {
-    console.log(`listening on port ${PORT}`);
-  });
-};
+const db = require('./db')
+const PORT = process.env.PORT || 3000; // this can be very useful if you deploy to Heroku!
 
-init();
+db.sync()  // sync our database
+  .then(function(){
+    app.listen(`${PORT}`, () => {
+      console.log(`listening on port ${PORT}`);
+    });
+  })
 
 // module.exports = app
